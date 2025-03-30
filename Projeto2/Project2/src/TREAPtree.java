@@ -7,13 +7,15 @@ class TreapNode{
 
     TreapNode(int data){
         this.data = data;
-        this.priority = new Random().nextInt(100);
+        this.priority = new Random().nextInt(1000000);
         this.left = this.right = null;
     }
 }
 
 
 public class TREAPtree {
+
+    public static int rotationCount = 0; // Contador de rotações
 
     /* Function to left-rotate a given treap
  
@@ -23,7 +25,8 @@ public class TREAPtree {
            / \                   / \
           X   Y                 L   X
     */
-    public static TreapNode rotateLeft(TreapNode root){
+    private static TreapNode rotateLeft(TreapNode root){
+        rotationCount++;
         TreapNode R = root.right;
         TreapNode X = root.right.left;
 
@@ -42,6 +45,7 @@ public class TREAPtree {
         X   Y                        Y   R
     */
     public static TreapNode rotateRight(TreapNode root){
+        rotationCount++;
         TreapNode L = root.left;
         TreapNode Y = root.left.right;
 
@@ -74,6 +78,10 @@ public class TREAPtree {
         }
 
         return root;
+    }
+
+    public static void resetRotationCount() {
+        rotationCount = 0;
     }
 
     // Recursive function to search for a key in a given treap
